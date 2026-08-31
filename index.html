@@ -232,6 +232,78 @@
   .cta-band .btn-primary{background:#fff;color:var(--wine);}
   .cta-band .btn-primary:hover{background:var(--rose);color:#fff;}
 
+  /* ---------- Contact Form ---------- */
+  .contact-form{
+    text-align:left;
+    max-width:560px;
+    margin:40px auto 0;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.16);
+    padding:40px;
+    border-radius:2px;
+  }
+  @media (max-width:640px){ .contact-form{padding:28px 22px;} }
+  .form-row{margin-bottom:22px;}
+  .form-row:last-of-type{margin-bottom:0;}
+  .form-row label{
+    display:block;margin-bottom:8px;
+    font-size:0.86rem;color:rgba(255,255,255,0.85);
+  }
+  .form-required{color:var(--rose);margin-left:2px;}
+  .form-row input,
+  .form-row select,
+  .form-row textarea{
+    width:100%;
+    padding:13px 14px;
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.22);
+    color:#fff;
+    font-family:var(--sans);
+    font-size:0.95rem;
+    border-radius:2px;
+    transition:border-color .25s, background .25s;
+  }
+  .form-row input::placeholder,
+  .form-row textarea::placeholder{color:rgba(255,255,255,0.4);}
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus{
+    outline:none;
+    border-color:var(--rose);
+    background:rgba(255,255,255,0.1);
+  }
+  .form-row textarea{resize:vertical;min-height:120px;}
+  .form-row select{
+    appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23D98C99'><path d='M5.5 7.5l4.5 4.5 4.5-4.5z'/></svg>");
+    background-repeat:no-repeat;
+    background-position:right 14px center;
+    background-size:16px;
+  }
+  .form-row select option{color:#14110D;}
+  .form-note{
+    font-size:0.8rem;
+    color:rgba(255,255,255,0.55);
+    margin:-8px 0 22px;
+  }
+  .form-submit-row{margin-top:28px;text-align:center;}
+  .contact-form .btn-primary{border:1px solid #fff;cursor:pointer;font-family:inherit;}
+  .form-error{
+    display:none;
+    color:var(--rose);
+    font-size:0.82rem;
+    margin-top:6px;
+  }
+  .form-error.show{display:block;}
+  .form-success{
+    display:none;
+    text-align:center;
+    padding:32px 20px;
+  }
+  .form-success.show{display:block;}
+  .form-success h3{color:#fff;font-size:1.3rem;margin-bottom:12px;}
+  .form-success p{color:rgba(255,255,255,0.85);margin:0;}
+
   /* ---------- Footer ---------- */
   footer{padding:56px 0 40px;font-size:0.85rem;color:var(--ink-soft);}
   .footer-grid{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;border-top:1px solid var(--line);padding-top:36px;}
@@ -445,12 +517,58 @@
 
 </main>
 
-<!-- CTA -->
+<!-- CTA / Contact Form -->
 <div class="cta-band" id="contact">
   <div class="wrap">
     <h2>まずは、無料相談から。</h2>
-    <p class="lede">ご自身に合ったコースを、丁寧にご案内します。</p>
-    <a href="#" class="btn btn-primary">無料相談を予約する</a>
+    <p class="lede">ご自身に合ったコースを、丁寧にご案内します。下記フォームよりお気軽にお問い合わせください。</p>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="form-row">
+        <label for="name">お名前<span class="form-required">＊</span></label>
+        <input type="text" id="name" name="name" placeholder="山田 花子" required>
+        <p class="form-error" id="nameError">お名前をご入力ください。</p>
+      </div>
+
+      <div class="form-row">
+        <label for="email">メールアドレス<span class="form-required">＊</span></label>
+        <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+        <p class="form-error" id="emailError">正しいメールアドレスをご入力ください。</p>
+      </div>
+
+      <div class="form-row">
+        <label for="phone">電話番号（任意）</label>
+        <input type="tel" id="phone" name="phone" placeholder="090-1234-5678">
+      </div>
+
+      <div class="form-row">
+        <label for="plan">ご興味のあるプラン</label>
+        <select id="plan" name="plan">
+          <option value="">選択してください</option>
+          <option value="single">Single（¥8,800／1回）</option>
+          <option value="grace">Grâce Course（¥68,000／全6回）</option>
+          <option value="private">Private（¥22,000／1回）</option>
+          <option value="undecided">まだ決めていない</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="message">ご相談内容<span class="form-required">＊</span></label>
+        <textarea id="message" name="message" placeholder="ご質問やご希望の日時など、自由にご記入ください。" required></textarea>
+        <p class="form-error" id="messageError">ご相談内容をご入力ください。</p>
+      </div>
+
+      <p class="form-note">ご入力いただいた情報は、ご相談へのご案内以外の目的では使用いたしません。</p>
+
+      <div class="form-submit-row">
+        <button type="submit" class="btn btn-primary">無料相談を予約する</button>
+      </div>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <h3>お問い合わせありがとうございます。</h3>
+      <p>内容を確認の上、担当より2営業日以内にご連絡いたします。</p>
+    </div>
   </div>
 </div>
 
@@ -490,6 +608,61 @@
         a.style.maxHeight = a.scrollHeight + 'px';
       }
     });
+  });
+
+  // Contact form validation & submit
+  const contactForm = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+
+  function showError(id, show){
+    const el = document.getElementById(id);
+    if(el) el.classList.toggle('show', show);
+  }
+
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const message = document.getElementById('message');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    let valid = true;
+
+    if(!name.value.trim()){
+      showError('nameError', true);
+      valid = false;
+    } else {
+      showError('nameError', false);
+    }
+
+    if(!emailPattern.test(email.value.trim())){
+      showError('emailError', true);
+      valid = false;
+    } else {
+      showError('emailError', false);
+    }
+
+    if(!message.value.trim()){
+      showError('messageError', true);
+      valid = false;
+    } else {
+      showError('messageError', false);
+    }
+
+    if(!valid) return;
+
+    // ここで実際の送信処理を行います。
+    // 静的サイト（Cloudflare Pages等）の場合、バックエンドがないと
+    // フォーム送信は完了しません。以下のいずれかと組み合わせてください：
+    //   1) Cloudflare Pages Functions（/functions/api/contact.js 等）でメール送信APIを自作
+    //   2) Formspree / Getform 等のフォーム受信サービスにfetchでPOST
+    //   3) 一時的にmailto:リンクで代用
+    // 例）fetch('/api/contact', { method:'POST', body: new FormData(contactForm) })
+    //       .then(...)
+
+    contactForm.style.display = 'none';
+    formSuccess.classList.add('show');
   });
 </script>
 
